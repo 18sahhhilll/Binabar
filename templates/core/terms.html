@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Terms and Conditions{% endblock %}
+{% block meta_description %}Binabar terms and conditions. Acceptable use, music rights, and removal requests.{% endblock %}
+{% block body_class %}page-terms{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <h1 class="page-title">Terms and Conditions</h1>
+        <p class="page-meta">Last updated: [LAST UPDATED DATE]</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-inner content-narrow legal-content">
+        <p>By using Binabar, you agree to these terms. If you do not agree, do not use the site.</p>
+
+        <h2>Acceptable use</h2>
+        <p>You may use Binabar to play the game as intended. You may not:</p>
+        <ul>
+            <li>Scrape, download, or redistribute audio clips or game content</li>
+            <li>Attempt to extract or reuse audio files from the site</li>
+            <li>Use automated tools or bots to interact with the game or API</li>
+            <li>Attempt to circumvent game mechanics, rate limits, or security measures</li>
+        </ul>
+
+        <h2>Music rights</h2>
+        <p>All music, beats, and recordings featured on Binabar belong to their respective artists, producers, and labels. Binabar does not claim ownership of, or any licence to, any track. Credit is given for every track used in the game and on the <a href="{% url 'core:credits' %}">Credits page</a>.</p>
+        <p>Credit is not permission, and the presence of a track on this site should not be interpreted as authorisation from the rights holder unless explicitly stated.</p>
+
+        <h2>Removal and correction requests</h2>
+        <p>Rights holders can request the removal or correction of any track by emailing <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>. Please include:</p>
+        <ul>
+            <li>The name of the song</li>
+            <li>Proof of ownership</li>
+            <li>What you would like changed or removed</li>
+        </ul>
+        <p>We will respond within [RESPONSE TIME, for example 7 days] and remove the track on a valid request.</p>
+
+        <h2>Disclaimer of warranties</h2>
+        <p>Binabar is provided "as is" without warranties of any kind, express or implied. We do not guarantee that the site will be available, error-free, or uninterrupted.</p>
+
+        <h2>Limitation of liability</h2>
+        <p>To the maximum extent permitted by law, Binabar and its operator shall not be liable for any indirect, incidental, or consequential damages arising from your use of the site.</p>
+
+        <h2>Changes to these terms</h2>
+        <p>We may update these terms from time to time. The "last updated" date at the top of this page reflects the most recent revision. Continued use of the site after changes constitutes acceptance.</p>
+
+        <h2>Governing law</h2>
+        <p>These terms are governed by the laws of [JURISDICTION].</p>
+
+        <h2>Contact</h2>
+        <p>Questions about these terms: <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></p>
+    </div>
+</section>
+{% endblock %}

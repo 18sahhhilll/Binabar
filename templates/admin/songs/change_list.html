@@ -1,0 +1,31 @@
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+<!-- Dashboard block -->
+{% if cl.model_admin %}
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem;">
+    <div style="padding: 1rem; background: #1a1a1a; border: 2px solid #333; text-align: center;">
+        <div style="font-size: 1.5rem; font-weight: 700; color: #f59e0b;">{{ draft_count|default:"0" }}</div>
+        <div style="color: #999; font-size: 0.8rem;">Drafts</div>
+    </div>
+    <div style="padding: 1rem; background: #1a1a1a; border: 2px solid #333; text-align: center;">
+        <div style="font-size: 1.5rem; font-weight: 700; color: #22c55e;">{{ published_count|default:"0" }}</div>
+        <div style="color: #999; font-size: 0.8rem;">Published</div>
+    </div>
+    <div style="padding: 1rem; background: #1a1a1a; border: 2px solid #333; text-align: center;">
+        <div style="font-size: 1.5rem; font-weight: 700; color: #ef4444;">{{ unverified_count|default:"0" }}</div>
+        <div style="color: #999; font-size: 0.8rem;">Unverified</div>
+    </div>
+    <div style="padding: 1rem; background: #1a1a1a; border: 2px solid #333; text-align: center;">
+        <div style="font-size: 1.5rem; font-weight: 700; color: #f97316;">{{ no_permission_count|default:"0" }}</div>
+        <div style="color: #999; font-size: 0.8rem;">No Permission</div>
+    </div>
+</div>
+<div style="margin-bottom: 1rem;">
+    <a href="{% url 'admin:songs_song_dashboard' %}" style="color: #facc15; font-size: 0.875rem;">Full Dashboard</a> |
+    <a href="{% url 'admin:songs_song_import' %}" style="color: #facc15; font-size: 0.875rem;">Import JSON</a> |
+    <a href="{% url 'admin:songs_song_testmode' %}" style="color: #facc15; font-size: 0.875rem;">Test Mode</a>
+</div>
+{% endif %}
+{{ block.super }}
+{% endblock %}

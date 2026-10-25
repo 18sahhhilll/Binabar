@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+    <title>{% block title %}Binabar{% endblock %} | Binabar</title>
+    <meta name="description" content="{% block meta_description %}Hear the beat, name the DHH track. A music guessing game for Indian hip hop heads.{% endblock %}">
+    <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}Binabar{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Hear the beat, name the DHH track. A music guessing game for Indian hip hop heads.{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% block og_image %}{% static 'img/og-image.png' %}{% endblock %}">
+    <meta property="og:site_name" content="Binabar">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Binabar{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Hear the beat, name the DHH track.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% static 'img/og-image.png' %}{% endblock %}">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'favicon.ico' %}" sizes="48x48" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <a href="{% url 'core:landing' %}" class="site-wordmark" aria-label="Binabar home">
+                <span class="wordmark-text">BINABAR</span>
+            </a>
+            <nav class="site-nav" role="navigation" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                </button>
+                <ul id="nav-menu" class="nav-list" role="list">
+                    <li><a href="{% url 'core:play' %}" class="nav-link">Play</a></li>
+                    <li><a href="{% url 'core:how_it_works' %}" class="nav-link">How it works</a></li>
+                    <li><a href="{% url 'core:credits' %}" class="nav-link">Credits</a></li>
+                    <li><a href="{% url 'core:about' %}" class="nav-link">About</a></li>
+                    <li class="nav-cta"><a href="{% url 'core:play' %}" class="btn btn-primary btn-sm">Play</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <ul class="footer-links" role="list">
+                    <li><a href="{% url 'core:play' %}">Play</a></li>
+                    <li><a href="{% url 'core:how_it_works' %}">How it works</a></li>
+                    <li><a href="{% url 'core:credits' %}">Credits</a></li>
+                    <li><a href="{% url 'core:about' %}">About</a></li>
+                    <li><a href="{% url 'core:privacy' %}">Privacy</a></li>
+                    <li><a href="{% url 'core:terms' %}">Terms</a></li>
+                    <li><a href="mailto:{{ CONTACT_EMAIL }}">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="footer-legal">
+                <p class="footer-copyright">&copy; {{ CURRENT_YEAR }} Binabar. All rights reserved.</p>
+                <p class="footer-attribution">All tracks, beats and recordings belong to their respective artists, producers and labels. Full credits are on the <a href="{% url 'core:credits' %}">Credits page</a>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/nav.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

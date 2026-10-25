@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+{% block meta_description %}About Binabar: what the project is and who runs it.{% endblock %}
+{% block body_class %}page-about{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <h1 class="page-title">About</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-inner content-narrow">
+        <h2>What is Binabar?</h2>
+        <p>[ABOUT TEXT: Describe what Binabar is and why it exists.]</p>
+
+        <h2>Who runs this?</h2>
+        <p>[ABOUT TEXT: Describe who runs the project. Do not invent a team, founders, or a story.]</p>
+
+        <h2>Contact</h2>
+        <p>For questions, corrections, or takedown requests: <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></p>
+    </div>
+</section>
+{% endblock %}

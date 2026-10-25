@@ -1,0 +1,46 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Import Results{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+    <h1 style="color: #facc15; font-family: 'Oswald', sans-serif; margin-bottom: 1rem;">
+        {% if dry_run %}Dry Run{% else %}Import{% endif %} Results
+    </h1>
+    <p style="color: #22c55e;">{{ success_count }} success</p>
+    <p style="color: #ef4444;">{{ error_count }} errors</p>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; color: #f5f0e8;">
+        <thead>
+            <tr style="border-bottom: 2px solid #333;">
+                <th style="padding: 0.5rem; text-align: left;">Row</th>
+                <th style="padding: 0.5rem; text-align: left;">Title</th>
+                <th style="padding: 0.5rem; text-align: left;">Status</th>
+                <th style="padding: 0.5rem; text-align: left;">Errors</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in results %}
+            <tr style="border-bottom: 1px solid #222;">
+                <td style="padding: 0.5rem;">{{ r.row }}</td>
+                <td style="padding: 0.5rem;">{{ r.title }}</td>
+                <td style="padding: 0.5rem; color: {% if r.status == 'error' %}#ef4444{% else %}#22c55e{% endif %};">
+                    {{ r.status|upper }}
+                </td>
+                <td style="padding: 0.5rem; color: #ef4444;">
+                    {% for e in r.errors %}{{ e }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="margin-top: 2rem;">
+        {% if dry_run %}
+        <a href="{% url 'admin:songs_song_import' %}" style="color: #facc15;">Import again (without dry run)</a> |
+        {% endif %}
+        <a href="{% url 'admin:songs_song_changelist' %}" style="color: #facc15;">Back to song list</a>
+    </div>
+</div>
+{% endblock %}

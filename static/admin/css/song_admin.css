@@ -1,0 +1,170 @@
+/* ============================================
+   BINABAR ADMIN STYLES
+   Clean DHH-themed admin interface
+   ============================================ */
+
+:root {
+    --admin-bg: #121212;
+    --admin-surface: #1e1e1e;
+    --admin-border: #333333;
+    --admin-accent: #facc15;
+    --admin-text: #f5f0e8;
+    --admin-muted: #999999;
+    --admin-danger: #ef4444;
+    --admin-success: #22c55e;
+}
+
+body.change-form,
+body.change-list {
+    background-color: var(--admin-bg) !important;
+    color: var(--admin-text) !important;
+}
+
+#header {
+    background: var(--admin-surface) !important;
+    border-bottom: 2px solid var(--admin-border);
+}
+
+#header h1, #header h1 a {
+    color: var(--admin-accent) !important;
+    font-family: 'Oswald', sans-serif !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.module {
+    background: var(--admin-surface) !important;
+    border: 1px solid var(--admin-border) !important;
+    border-radius: 4px;
+}
+
+.module h2, .module caption {
+    background: #252525 !important;
+    color: var(--admin-accent) !important;
+    font-family: 'Oswald', sans-serif !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+fieldset {
+    border: 1px solid var(--admin-border) !important;
+    background: var(--admin-surface) !important;
+    margin-bottom: 1.5rem !important;
+    padding: 1rem !important;
+    border-radius: 4px;
+}
+
+fieldset h2 {
+    color: var(--admin-accent) !important;
+    font-family: 'Oswald', sans-serif !important;
+    font-size: 1.1rem !important;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.form-row {
+    border-bottom: 1px solid #2a2a2a !important;
+    padding: 0.75rem 0 !important;
+}
+
+.form-row label {
+    color: var(--admin-text) !important;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="url"],
+select,
+textarea {
+    background: #181818 !important;
+    color: var(--admin-text) !important;
+    border: 1px solid var(--admin-border) !important;
+    padding: 0.5rem !important;
+    border-radius: 3px !important;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="url"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--admin-accent) !important;
+    outline: none !important;
+}
+
+.submit-row {
+    background: var(--admin-surface) !important;
+    border: 1px solid var(--admin-border) !important;
+    border-radius: 4px;
+}
+
+.submit-row input[type="submit"] {
+    background: var(--admin-accent) !important;
+    color: #121212 !important;
+    font-weight: 700 !important;
+    border-radius: 3px !important;
+    border: none !important;
+    text-transform: uppercase;
+    padding: 0.6rem 1.5rem !important;
+}
+
+.submit-row input[type="submit"]:hover {
+    background: #eab308 !important;
+}
+
+/* Audio preview box */
+.audio-preview-box {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #181818;
+    border: 2px solid var(--admin-border);
+    border-radius: 4px;
+}
+
+.audio-preview-box audio {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.clip-duration-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    border-radius: 3px;
+}
+
+.clip-duration-badge.valid {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--admin-success);
+    border: 1px solid var(--admin-success);
+}
+
+.clip-duration-badge.invalid {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--admin-danger);
+    border: 1px solid var(--admin-danger);
+}
+
+/* Responsive for phone */
+@media (max-width: 768px) {
+    .form-row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-row label {
+        margin-bottom: 0.25rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    select,
+    textarea {
+        width: 100% !important;
+    }
+}

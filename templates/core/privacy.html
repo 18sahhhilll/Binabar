@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Privacy Policy{% endblock %}
+{% block meta_description %}Binabar privacy policy. Plain language, accurate to what is built.{% endblock %}
+{% block body_class %}page-privacy{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <h1 class="page-title">Privacy Policy</h1>
+        <p class="page-meta">Last updated: [LAST UPDATED DATE]</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-inner content-narrow legal-content">
+        <p>This privacy policy explains what data Binabar collects, how it is used, and your choices. Binabar is operated by [LEGAL ENTITY / OWNER NAME].</p>
+
+        <h2>No user accounts</h2>
+        <p>Binabar does not have public user accounts, registration, or login for players. There is no profile, no password, and no personal data collected through an account system.</p>
+
+        <h2>Game scores</h2>
+        <p>Your game scores (including your best score) are stored only in your browser's localStorage. This data never leaves your device and is not sent to our servers. You can clear it at any time by clearing your browser data.</p>
+
+        <h2>Session cookie</h2>
+        <p>Binabar uses a Django session cookie to manage game rounds while you play. This cookie:</p>
+        <ul>
+            <li>Is marked HttpOnly and SameSite=Lax</li>
+            <li>Contains only a session identifier (no personal data)</li>
+            <li>Expires after 8 hours or when you close your browser</li>
+            <li>Is required for the game to function</li>
+        </ul>
+
+        <h2>Audio delivery</h2>
+        <p>Audio clips are delivered from Cloudflare R2, an S3-compatible storage service operated by Cloudflare, Inc. When you play an audio clip, your browser makes a request to Cloudflare's servers. Cloudflare's privacy policy applies to that request.</p>
+
+        <h2>Admin login</h2>
+        <p>The site has an admin login that is used only by the site owner to manage content. The admin login cookie applies only to the site owner and is not relevant to players.</p>
+
+        <h2>Analytics</h2>
+        <p>Binabar does not use any analytics, tracking, or advertising services. No third-party scripts are loaded for tracking purposes.</p>
+
+        <h2>Hosting</h2>
+        <p>Binabar is hosted on [HOSTING PROVIDER]. Server logs may contain IP addresses and request data as part of standard web server operation. These logs are managed by the hosting provider under their own privacy policy.</p>
+
+        <h2>Data requests</h2>
+        <p>Since Binabar does not collect personal data from players, there is typically no data to provide, correct, or delete. If you have questions or concerns, contact <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.</p>
+    </div>
+</section>
+{% endblock %}

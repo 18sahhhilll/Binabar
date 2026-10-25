@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}404{% endblock %}
+{% block meta_description %}Page not found.{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
+{% block body_class %}page-error{% endblock %}
+
+{% block content %}
+<section class="error-page">
+    <div class="error-inner">
+        <span class="error-code">404</span>
+        <h1 class="error-title">Track not found</h1>
+        <p class="error-text">That page does not exist. Maybe the URL is wrong, or the track got pulled.</p>
+        <div class="error-actions">
+            <a href="{% url 'core:landing' %}" class="btn btn-primary">Go home</a>
+            <a href="{% url 'core:play' %}" class="btn btn-secondary">Play the game</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

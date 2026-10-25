@@ -1,0 +1,39 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Test Mode{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/play.css' %}">
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 0 auto; padding: 2rem;">
+    <h1 style="color: #facc15; font-family: 'Oswald', sans-serif; margin-bottom: 1rem;">Test Mode</h1>
+    <p style="color: #999; margin-bottom: 2rem;">Play a full game using draft songs only. Draft songs never appear in the public game.</p>
+
+    {% if draft_count == 0 %}
+    <div style="background: #1a1a1a; border: 2px solid #333; padding: 2rem; text-align: center;">
+        <p style="color: #f5f0e8; font-size: 1.125rem;">No draft songs available.</p>
+        <p style="color: #999; margin-top: 0.5rem;">Add some draft songs to test the game flow.</p>
+    </div>
+    {% else %}
+    <div style="background: #1a1a1a; border: 2px solid #333; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <p style="color: #f5f0e8;">{{ draft_count }} draft song{{ draft_count|pluralize }} available for testing.</p>
+        <ul style="color: #999; margin-top: 0.5rem; padding-left: 1.5rem;">
+            {% for song in songs %}
+            <li>{{ song.title }} - {{ song.artist }}
+                <a href="{% url 'admin:songs_song_preview' song.pk %}" style="color: #facc15; font-size: 0.875rem;">[preview]</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <p style="color: #999; font-size: 0.875rem;">Test mode uses the same game mechanics as the public game, but only selects from draft songs.</p>
+    {% endif %}
+
+    <div style="margin-top: 2rem;">
+        <a href="{% url 'admin:songs_song_changelist' %}" style="color: #facc15;">Back to song list</a>
+    </div>
+</div>
+{% endblock %}

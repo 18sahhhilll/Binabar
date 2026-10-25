@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Song Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Song Dashboard</h1>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 2rem 0;">
+        <div style="padding: 1.5rem; background: #1a1a1a; border: 2px solid #333; text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: #facc15;">{{ total_count }}</div>
+            <div style="color: #999; margin-top: 0.5rem;">Total songs</div>
+        </div>
+        <div style="padding: 1.5rem; background: #1a1a1a; border: 2px solid #333; text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: #22c55e;">{{ published_count }}</div>
+            <div style="color: #999; margin-top: 0.5rem;">Published</div>
+        </div>
+        <div style="padding: 1.5rem; background: #1a1a1a; border: 2px solid #333; text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: #f59e0b;">{{ draft_count }}</div>
+            <div style="color: #999; margin-top: 0.5rem;">Drafts</div>
+        </div>
+        <div style="padding: 1.5rem; background: #1a1a1a; border: 2px solid #333; text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: #ef4444;">{{ unverified_count }}</div>
+            <div style="color: #999; margin-top: 0.5rem;">Unverified</div>
+        </div>
+        <div style="padding: 1.5rem; background: #1a1a1a; border: 2px solid #333; text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700; color: #f97316;">{{ no_permission_count }}</div>
+            <div style="color: #999; margin-top: 0.5rem;">No permission</div>
+        </div>
+    </div>
+    <p><a href="{% url 'admin:songs_song_changelist' %}" style="color: #facc15;">Back to song list</a></p>
+</div>
+{% endblock %}

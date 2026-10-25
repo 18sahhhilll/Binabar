@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Credits{% endblock %}
+{% block meta_description %}Full credits for every track in Binabar: artist, producer, label, year, and links to the originals.{% endblock %}
+{% block body_class %}page-credits{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <h1 class="page-title">Credits</h1>
+        <p class="page-intro">Every track, every artist, every producer. This list is generated from the database and always in sync with the game.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-inner">
+        <!-- Filters -->
+        {% if artists or labels %}
+        <form class="credits-filters" method="get" action="{% url 'core:credits' %}">
+            <div class="filter-group">
+                <label for="artist-filter">Filter by artist</label>
+                <select id="artist-filter" name="artist" onchange="this.form.submit()">
+                    <option value="">All artists</option>
+                    {% for a in artists %}
+                    <option value="{{ a }}" {% if a == artist_filter %}selected{% endif %}>{{ a }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="label-filter">Filter by label</label>
+                <select id="label-filter" name="label" onchange="this.form.submit()">
+                    <option value="">All labels</option>
+                    {% for l in labels %}
+                    <option value="{{ l }}" {% if l == label_filter %}selected{% endif %}>{{ l }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% if artist_filter or label_filter %}
+            <a href="{% url 'core:credits' %}" class="btn btn-secondary btn-sm">Clear filters</a>
+            {% endif %}
+        </form>
+        {% endif %}
+
+        <!-- Songs list -->
+        {% if songs %}
+        <div class="credits-list">
+            {% for song in songs %}
+            <article class="credit-card">
+                <h3 class="credit-title">{{ song.title }}</h3>
+                <dl class="credit-details">
+                    <div class="credit-row">
+                        <dt>Artist{{ song.artists|length|pluralize:"s" }}</dt>
+                        <dd>{% for a in song.artists %}{{ a }}{% if not forloop.last %}, {% endif %}{% empty %}{{ song.artist }}{% endfor %}</dd>
+                    </div>
+                    <div class="credit-row">
+                        <dt>Producer{{ song.producers|length|pluralize:"s" }}</dt>
+                        <dd>{% for p in song.producers %}{{ p }}{% if not forloop.last %}, {% endif %}{% endfor %}</dd>
+                    </div>
+                    <div class="credit-row">
+                        <dt>Label</dt>
+                        <dd>{{ song.label }}</dd>
+                    </div>
+                    <div class="credit-row">
+                        <dt>Year</dt>
+                        <dd>{{ song.year }}</dd>
+                    </div>
+                </dl>
+                {% if song.source_url %}
+                <a href="{{ song.source_url }}" class="credit-link" target="_blank" rel="noopener noreferrer">Listen to the original</a>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state-inline">
+            <p>{% if artist_filter or label_filter %}No tracks match that filter.{% else %}No tracks credited yet. Check back after the first tracks are added.{% endif %}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Rights holders -->
+<section class="section section-rights">
+    <div class="section-inner content-narrow">
+        <h2>Rights holders</h2>
+        <p>If you are a rights holder and need to request a correction or takedown, please email <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a> with the following:</p>
+        <ul>
+            <li>The name of the song</li>
+            <li>Proof of ownership (label/distributor confirmation, ISRC, or similar)</li>
+            <li>What you would like changed or removed</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

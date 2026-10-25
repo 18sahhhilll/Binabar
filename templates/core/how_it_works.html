@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}How it works{% endblock %}
+{% block meta_description %}Learn how Binabar works. 10 rounds of DHH beats, 3 hints, 3 tries per round. Here are the rules.{% endblock %}
+{% block body_class %}page-how-it-works{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <h1 class="page-title">How it works</h1>
+        <p class="page-intro">A quick rundown of how Binabar plays.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-inner content-narrow">
+        <h2>The game</h2>
+        <p>Each game is <strong>10 rounds</strong>. In each round, you hear a short instrumental clip (10 to 15 seconds, beats only, no vocals) from an Indian hip hop track.</p>
+        <p>Your job: name the track.</p>
+
+        <h2>Guessing</h2>
+        <p>Type your answer in the text field. Autocomplete will help you find the right track. Matching is case-insensitive, ignores punctuation and extra spaces.</p>
+        <p>You get <strong>3 attempts</strong> per round. After 3 wrong guesses, the answer is revealed.</p>
+        <p>You can also skip a round if you are stuck, but you score 0.</p>
+
+        <h2>Audio</h2>
+        <p>The clip plays when you press the play button. You can replay it up to <strong>3 times</strong> per round. Audio never plays automatically.</p>
+
+        <h2>Hints</h2>
+        <p>Each round gives you access to <strong>3 hints</strong>:</p>
+        <ul>
+            <li><strong>Artist initial:</strong> the first letter of the main artist's name</li>
+            <li><strong>Release year:</strong> the year the track came out</li>
+            <li><strong>Language:</strong> the primary language of the track</li>
+        </ul>
+        <p>Each hint costs 25 points from your round score.</p>
+
+        <h2>Scoring</h2>
+        <table class="rules-table">
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Correct, no hints</td><td>100</td></tr>
+                <tr><td>Correct, 1 hint</td><td>75</td></tr>
+                <tr><td>Correct, 2 hints</td><td>50</td></tr>
+                <tr><td>Correct, 3 hints</td><td>25</td></tr>
+                <tr><td>Wrong answer or skip</td><td>0</td></tr>
+            </tbody>
+        </table>
+
+        <h2>Credits</h2>
+        <p>After every round, you see the full credits: title, artist, producer, label, year, and a link to listen to the original track. Every track in the game is also listed on the <a href="{% url 'core:credits' %}">Credits page</a>.</p>
+
+        <h2>Best score</h2>
+        <p>Your best score is saved in your browser (localStorage). No accounts needed.</p>
+    </div>
+</section>
+{% endblock %}

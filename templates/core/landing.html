@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Hear the beat, name the track{% endblock %}
+{% block meta_description %}Binabar is a music guessing game for Indian hip hop. Listen to a beat, guess the DHH track. 10 rounds, 3 hints, no mercy.{% endblock %}
+{% block og_title %}Binabar: Hear the beat, name the track{% endblock %}
+{% block body_class %}page-landing{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-inner">
+        <h1 class="hero-headline">Hear the beat.<br>Name the track.</h1>
+        <p class="hero-sub">A beat drops. You get 10 rounds to prove you know your DHH. Three hints, three tries, no mercy.</p>
+        <a href="{% url 'core:play' %}" class="btn btn-primary btn-lg">Play now</a>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+        <div class="eq-bars">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+        </div>
+    </div>
+</section>
+
+<!-- How a round works -->
+<section class="section section-steps">
+    <div class="section-inner">
+        <h2 class="section-title">How a round works</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <span class="step-number">01</span>
+                <h3 class="step-title">Listen</h3>
+                <p>A 10 to 15 second instrumental clip plays. No vocals, just the beat. You can replay it up to 3 times.</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">02</span>
+                <h3 class="step-title">Guess</h3>
+                <p>Type your answer. Autocomplete helps you pick. You get 3 attempts before the answer is revealed.</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">03</span>
+                <h3 class="step-title">Score</h3>
+                <p>100 points for a clean guess, minus 25 for each hint you use. After every round, you see the full credits.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scoring & Hints -->
+<section class="section section-scoring">
+    <div class="section-inner">
+        <h2 class="section-title">Scoring and hints</h2>
+        <div class="scoring-grid">
+            <div class="scoring-card">
+                <span class="scoring-value">100</span>
+                <span class="scoring-label">Points, no hints</span>
+            </div>
+            <div class="scoring-card">
+                <span class="scoring-value">75</span>
+                <span class="scoring-label">1 hint used</span>
+            </div>
+            <div class="scoring-card">
+                <span class="scoring-value">50</span>
+                <span class="scoring-label">2 hints used</span>
+            </div>
+            <div class="scoring-card">
+                <span class="scoring-value">25</span>
+                <span class="scoring-label">3 hints used</span>
+            </div>
+        </div>
+        <div class="hints-info">
+            <h3>Three hints per round</h3>
+            <ul class="hints-list">
+                <li><strong>Artist initial:</strong> the first letter of the main artist's name</li>
+                <li><strong>Release year:</strong> the year the track came out</li>
+                <li><strong>Language:</strong> the primary language of the track</li>
+            </ul>
+            <p>Each hint costs 25 points. Wrong answer or skip scores 0.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section section-cta">
+    <div class="section-inner">
+        <h2 class="section-title">Ready?</h2>
+        <p>10 rounds. Pick your beats. Prove your ear.</p>
+        <a href="{% url 'core:play' %}" class="btn btn-primary btn-lg">Start playing</a>
+    </div>
+</section>
+{% endblock %}

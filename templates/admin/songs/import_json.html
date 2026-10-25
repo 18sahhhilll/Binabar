@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Import Songs{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; padding: 2rem;">
+    <h1 style="color: #facc15; font-family: 'Oswald', sans-serif; margin-bottom: 1rem;">Import Songs from JSON</h1>
+    <p style="color: #999; margin-bottom: 2rem;">Upload a JSON file with song data. Use dry run first to check for errors.</p>
+
+    <form method="post" enctype="multipart/form-data" style="background: #1a1a1a; border: 2px solid #333; padding: 1.5rem;">
+        {% csrf_token %}
+        <div style="margin-bottom: 1rem;">
+            <label for="json_file" style="color: #f5f0e8; display: block; margin-bottom: 0.5rem; font-weight: 600;">JSON file</label>
+            <input type="file" name="json_file" id="json_file" accept=".json" required style="color: #f5f0e8;">
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+            <label style="color: #f5f0e8; cursor: pointer;">
+                <input type="checkbox" name="dry_run" checked> Dry run (check for errors without importing)
+            </label>
+        </div>
+        <button type="submit" style="padding: 0.75rem 2rem; background: #facc15; color: #121212; border: none; font-weight: 600; cursor: pointer;">Upload and validate</button>
+    </form>
+
+    <div style="margin-top: 2rem;">
+        <a href="{% url 'admin:songs_song_changelist' %}" style="color: #facc15;">Back to song list</a>
+    </div>
+</div>
+{% endblock %}

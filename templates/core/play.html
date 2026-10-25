@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Play{% endblock %}
+{% block meta_description %}Play Binabar. 10 rounds of Indian hip hop beats. Guess the track, earn points.{% endblock %}
+{% block body_class %}page-play{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/play.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="play-container">
+    {% if song_count == 0 %}
+    <!-- Empty State -->
+    <div class="empty-state">
+        <div class="empty-state-inner">
+            <h1 class="empty-state-title">Setting up the booth</h1>
+            <p class="empty-state-text">Tracks are being loaded. The game is not ready yet. Check back soon.</p>
+            <a href="{% url 'core:landing' %}" class="btn btn-primary">Back to home</a>
+        </div>
+    </div>
+    {% else %}
+    <!-- Pre-game -->
+    <div id="pre-game" class="game-screen">
+        <div class="game-screen-inner">
+            <h1 class="game-title">Ready to play?</h1>
+            {% if song_count < 10 %}
+            <div class="game-notice" role="alert">
+                <p>Only {{ song_count }} track{{ song_count|pluralize }} available right now. The game will have {{ song_count }} round{{ song_count|pluralize }} instead of 10.</p>
+            </div>
+            {% endif %}
+            <p class="game-rules-brief">10 rounds. Guess the track from the beat. 3 hints, 3 tries per round.</p>
+            <button id="start-game-btn" class="btn btn-primary btn-lg" type="button">Start game</button>
+        </div>
+    </div>
+
+    <!-- Active round -->
+    <div id="active-round" class="game-screen" hidden>
+        <div class="game-screen-inner">
+            <!-- Round info bar -->
+            <div class="round-bar">
+                <span class="round-counter">Round <span id="round-number">1</span> / <span id="total-rounds">10</span></span>
+                <span class="score-display">Score: <span id="current-score">0</span></span>
+            </div>
+
+            <!-- Audio player -->
+            <div class="audio-section">
+                <button id="play-audio-btn" class="btn-audio" type="button" aria-label="Play audio clip">
+                    <svg class="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <polygon points="5,3 19,12 5,21" fill="currentColor"/>
+                    </svg>
+                    <span class="btn-audio-text">Play clip</span>
+                </button>
+                <div class="eq-bars eq-bars-game" id="eq-bars" aria-hidden="true">
+                    <span class="eq-bar"></span>
+                    <span class="eq-bar"></span>
+                    <span class="eq-bar"></span>
+                    <span class="eq-bar"></span>
+                    <span class="eq-bar"></span>
+                </div>
+                <span class="replay-count" id="replay-count">3 replays left</span>
+            </div>
+
+            <!-- Hints -->
+            <div class="hints-section">
+                <div class="hints-row">
+                    <button id="hint-artist" class="btn btn-hint" type="button" data-hint="artist_initial">
+                        Artist initial
+                    </button>
+                    <button id="hint-year" class="btn btn-hint" type="button" data-hint="year">
+                        Year
+                    </button>
+                    <button id="hint-language" class="btn btn-hint" type="button" data-hint="language">
+                        Language
+                    </button>
+                </div>
+                <div id="hint-display" class="hint-display" aria-live="polite"></div>
+            </div>
+
+            <!-- Guess input -->
+            <div class="guess-section">
+                <label for="guess-input" class="sr-only">Your guess</label>
+                <div class="guess-input-wrap">
+                    <input
+                        type="text"
+                        id="guess-input"
+                        class="guess-input"
+                        placeholder="Type the track name..."
+                        autocomplete="off"
+                        aria-describedby="attempts-left"
+                    >
+                    <div id="autocomplete-list" class="autocomplete-list" role="listbox" aria-label="Song suggestions" hidden></div>
+                </div>
+                <button id="submit-guess-btn" class="btn btn-primary" type="button">Guess</button>
+                <button id="skip-btn" class="btn btn-secondary" type="button">Skip</button>
+            </div>
+            <p id="attempts-left" class="attempts-info" aria-live="polite">3 attempts left</p>
+            <p id="guess-feedback" class="guess-feedback" aria-live="assertive"></p>
+        </div>
+    </div>
+
+    <!-- Round result -->
+    <div id="round-result" class="game-screen" hidden>
+        <div class="game-screen-inner">
+            <div id="result-status" class="result-status"></div>
+            <div id="result-credits" class="result-credits"></div>
+            <button id="next-round-btn" class="btn btn-primary" type="button">Next round</button>
+        </div>
+    </div>
+
+    <!-- End screen -->
+    <div id="end-screen" class="game-screen" hidden>
+        <div class="game-screen-inner">
+            <h1 class="end-title">Game over</h1>
+            <div class="end-score">
+                <span class="end-score-value" id="final-score">0</span>
+                <span class="end-score-label">points</span>
+            </div>
+            <div id="best-score-display" class="best-score" hidden>
+                <p>Best score: <span id="best-score-value">0</span></p>
+            </div>
+            <div id="round-recap" class="round-recap"></div>
+            <div class="end-actions">
+                <button id="play-again-btn" class="btn btn-primary btn-lg" type="button">Play again</button>
+                <a href="{% url 'core:landing' %}" class="btn btn-secondary btn-lg">Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden CSRF token -->
+    <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% if song_count > 0 %}
+<script src="{% static 'js/game.js' %}"></script>
+{% endif %}
+{% endblock %}

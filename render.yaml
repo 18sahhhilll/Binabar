@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: binabar
+    runtime: python
+    plan: starter
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+    startCommand: gunicorn binabar.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: ADMIN_URL
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: binabar-db
+          property: connectionString
+      - key: R2_ACCOUNT_ID
+        sync: false
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+      - key: R2_BUCKET_NAME
+        sync: false
+      - key: R2_CUSTOM_DOMAIN
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: CONTACT_EMAIL
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+
+databases:
+  - name: binabar-db
+    plan: starter
+    databaseName: binabar

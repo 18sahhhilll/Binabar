@@ -1,0 +1,66 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Preview: {{ song.title }}{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/play.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="preview-container" style="max-width: 700px; margin: 0 auto; padding: 2rem;">
+    <h1 style="color: #facc15; font-family: 'Oswald', sans-serif; margin-bottom: 1rem;">Preview: {{ song.title }}</h1>
+    <p style="color: #999; margin-bottom: 2rem;">This shows how the round and answer reveal will look. Does not affect any score.</p>
+
+    <!-- Audio preview -->
+    <div style="background: #1a1a1a; border: 2px solid #333; padding: 1.5rem; margin-bottom: 1.5rem;">
+        <h3 style="color: #f5f0e8; margin-bottom: 1rem;">Audio clip ({{ song.start_seconds }}s to {{ song.end_seconds }}s)</h3>
+        {% if song.source_type == "upload" and audio_url %}
+        <audio controls preload="none" style="width: 100%;">
+            <source src="{{ audio_url }}" type="audio/mpeg">
+            Your browser does not support audio playback.
+        </audio>
+        {% elif song.source_type == "youtube" and song.youtube_id %}
+        <p style="color: #f5f0e8;">YouTube ID: {{ song.youtube_id }} ({{ song.start_seconds }}s to {{ song.end_seconds }}s)</p>
+        {% else %}
+        <p style="color: #ef4444;">No audio source configured.</p>
+        {% endif %}
+
+        {% if song.clip_length %}
+        <p style="margin-top: 0.5rem; {% if song.clip_length < 8 or song.clip_length > 20 %}color: #ef4444; font-weight: bold;{% else %}color: #22c55e;{% endif %}">
+            Clip length: {{ song.clip_length|floatformat:1 }}s
+            {% if song.clip_length < 8 or song.clip_length > 20 %}
+            (WARNING: Outside 8-20s range)
+            {% endif %}
+        </p>
+        {% endif %}
+    </div>
+
+    <!-- Answer reveal preview -->
+    <div style="background: #1a1a1a; border: 2px solid #333; padding: 1.5rem;">
+        <h3 style="color: #22c55e; margin-bottom: 1rem;">Answer reveal preview</h3>
+        <div class="result-credits" style="color: #f5f0e8;">
+            <h4 style="font-family: 'Oswald', sans-serif; font-size: 1.5rem; color: #facc15; margin-bottom: 0.5rem;">{{ song.title }}</h4>
+            <dl style="display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 1rem;">
+                <dt style="color: #999;">Artist</dt>
+                <dd>{% for a in song.artists %}{{ a }}{% if not forloop.last %}, {% endif %}{% empty %}{{ song.artist }}{% endfor %}</dd>
+                <dt style="color: #999;">Producer{{ song.producers|length|pluralize:"s" }}</dt>
+                <dd>{% for p in song.producers %}{{ p }}{% if not forloop.last %}, {% endif %}{% endfor %}</dd>
+                <dt style="color: #999;">Label</dt>
+                <dd>{{ song.label }}</dd>
+                <dt style="color: #999;">Year</dt>
+                <dd>{{ song.year }}</dd>
+            </dl>
+            {% if song.source_url %}
+            <a href="{{ song.source_url }}" target="_blank" rel="noopener noreferrer" style="color: #facc15; display: inline-block; margin-top: 1rem;">Listen to the original</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem;">
+        <a href="{% url 'admin:songs_song_change' song.pk %}" style="color: #facc15;">Back to edit</a> |
+        <a href="{% url 'admin:songs_song_changelist' %}" style="color: #facc15;">Song list</a>
+    </div>
+</div>
+{% endblock %}
